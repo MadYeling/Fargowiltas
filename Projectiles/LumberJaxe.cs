@@ -1,25 +1,31 @@
 ﻿using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Fargowiltas.Projectiles
 {
-    public class BoomShuriken : ModProjectile
+    public class LumberJaxe : ModProjectile
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Boom Shuriken");
+            DisplayName.SetDefault("LumberJaxe");
         }
 
         public override void SetDefaults()
         {
-            projectile.width = 11;
-            projectile.height = 11;
+            projectile.width = 42;
+            projectile.height = 40;
             projectile.friendly = true;
             projectile.thrown = true;
-            projectile.penetrate = 5;
-            projectile.aiStyle = 2;
+            projectile.penetrate = 1;
+            projectile.aiStyle = 0;
             projectile.timeLeft = 150;
-            aiType = 48;
+            aiType = ProjectileID.CrystalBullet;
+        }
+
+        public override void AI()
+        {
+            projectile.rotation += 0.3f;
         }
 
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)

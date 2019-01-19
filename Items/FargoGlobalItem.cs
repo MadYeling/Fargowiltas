@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 
@@ -22,10 +23,35 @@ namespace Fargowiltas.Items
                 tooltips.Add(line);
             }
 
-            // ReSharper disable once InvertIf
+            if (Array.IndexOf(thrown, item.type) > -1)
+            {
+                /*foreach(TooltipLine line in tooltips)
+                {
+                    if (line.Name == "")
+                    {
+
+                    }
+                }*/
+
+                TooltipLine line = new TooltipLine(mod, "help", "Right click to convert");
+                tooltips.Add(line);
+            }
+
             if (item.type == ItemID.CrystalBall)
             {
                 TooltipLine line = new TooltipLine(mod, "Altar", "Functions as a Demon altar as well");
+                tooltips.Add(line);
+            }
+
+            if (item.type == ItemID.GoodieBag)
+            {
+                TooltipLine line = new TooltipLine(mod, "help", "Also use this to toggle the Halloween season");
+                tooltips.Add(line);
+            }
+
+            if (item.type == ItemID.Present)
+            {
+                TooltipLine line = new TooltipLine(mod, "help", "Also use this to toggle the Christmas season");
                 tooltips.Add(line);
             }
         }
@@ -40,7 +66,7 @@ namespace Fargowiltas.Items
             {
                 int num30 = 0;
                 int num31 = yOffset;
-                // ReSharper disable once SwitchStatementMissingSomeCases
+                
                 switch (l)
                 {
                     case 4:
@@ -85,20 +111,15 @@ namespace Fargowiltas.Items
 
         public override bool UseItem(Item item, Player player)
         {
-            // ReSharper disable once SwitchStatementMissingSomeCases
             switch (item.type)
             {
                 case ItemID.GoodieBag:
                     FargoWorld.halloween = !FargoWorld.halloween;
-
                     Main.NewText(FargoWorld.halloween ? "Halloween has begun!" : "Halloween has ended!", 175, 75);
-
                     return true;
                 case ItemID.Present:
                     FargoWorld.xmas = !FargoWorld.xmas;
-
                     Main.NewText(FargoWorld.xmas ? "Christmas has begun!" : "Christmas has ended!", 175, 75);
-
                     return true;
             }
 
@@ -107,7 +128,6 @@ namespace Fargowiltas.Items
 
         public override void OpenVanillaBag(string context, Player player, int arg)
         {
-            // ReSharper disable once SwitchStatementMissingSomeCases
             switch (arg)
             {
                 case ItemID.KingSlimeBossBag:
@@ -147,13 +167,18 @@ namespace Fargowiltas.Items
         public override void RightClick(Item item, Player player)
         {
             if (Array.IndexOf(thrown, item.type) <= -1) return;
-            Main.NewText(item.Name, 175, 75);
+
             NewThrown(item, player, item.Name.Replace(" ", "").Replace("'", "").Replace("-", "").Replace(":", ""));
         }
 
         private void NewThrown(Item item, Player player, string thrown)
         {
-            Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, mod.ItemType(thrown + "Thrown"), 1, false, item.prefix);
+            int num = Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, mod.ItemType(thrown + "Thrown"), 1, false, item.prefix);
+
+            if (Main.netMode == 1)
+            {
+                NetMessage.SendData(21, -1, -1, null, num, 1f, 0f, 0f, 0, 0, 0);
+            }
         }
     }
 }

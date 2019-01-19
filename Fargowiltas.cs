@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -8,6 +9,7 @@ namespace Fargowiltas
     class Fargowiltas : Mod
     {
         internal static ModHotKey HomeKey;
+        internal static ModHotKey RodKey;
 
         #region mod loaded bools
         internal bool fargoLoaded;
@@ -33,8 +35,12 @@ namespace Fargowiltas
         internal bool enigmaLoaded;
         internal bool exodusLoaded;
         internal bool splitLoaded;
-        internal bool ferniumLoaded;
+        //internal bool ferniumLoaded;
         internal bool antiarisLoaded;
+        internal bool aaLoaded;
+        internal bool trelamiumLoaded;
+        internal bool pinkyLoaded;
+        internal bool redemptionLoaded;
         #endregion
 
         //swarms
@@ -59,6 +65,7 @@ namespace Fargowiltas
         {
             instance = this;
             HomeKey = RegisterHotKey("Teleport Home", "P");
+            RodKey = RegisterHotKey("Rod of Discord", "E");
         }
 
         #region mod loaded bools
@@ -90,8 +97,12 @@ namespace Fargowiltas
                 enigmaLoaded = ModLoader.GetMod("Laugicality") != null; //why
                 exodusLoaded = ModLoader.GetMod("Exodus") != null;
                 splitLoaded = ModLoader.GetMod("Split") != null;
-                ferniumLoaded = ModLoader.GetMod("Fernium") != null;
+                //ferniumLoaded = ModLoader.GetMod("Fernium") != null;
                 antiarisLoaded = ModLoader.GetMod("Antiaris") != null;
+                aaLoaded = ModLoader.GetMod("AAMod") != null;
+                trelamiumLoaded = ModLoader.GetMod("TrelamiumMod") != null;
+                pinkyLoaded = ModLoader.GetMod("pinkymod") != null;
+                redemptionLoaded = ModLoader.GetMod("Redemption") != null;
             }
             catch (Exception e)
             {
@@ -371,12 +382,6 @@ namespace Fargowiltas
             recipe.AddIngredient(ItemID.Hemopiranha);
             recipe.AddTile(TileID.AlchemyTable);
             recipe.SetResult(ItemID.Ebonkoi);
-            recipe.AddRecipe();
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.ViciousMushroom);
-            recipe.AddTile(TileID.AlchemyTable);
-            recipe.SetResult(ItemID.VileMushroom);
             recipe.AddRecipe();
 
             recipe = new ModRecipe(this);
@@ -1171,6 +1176,18 @@ namespace Fargowiltas
             recipe.AddRecipe();
 
             recipe = new ModRecipe(this);
+            recipe.AddIngredient(ItemID.IronBar);
+            recipe.AddTile(TileID.AlchemyTable);
+            recipe.SetResult(ItemID.LeadBar);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(this);
+            recipe.AddIngredient(ItemID.LeadBar);
+            recipe.AddTile(TileID.AlchemyTable);
+            recipe.SetResult(ItemID.IronBar);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(this);
             recipe.AddIngredient(ItemID.SilverBar);
             recipe.AddTile(TileID.AlchemyTable);
             recipe.SetResult(ItemID.TungstenBar);
@@ -1287,103 +1304,6 @@ namespace Fargowiltas
 
             #endregion
 
-            #region  ice chest loot
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.CloudinaBottle);
-            recipe.AddIngredient(ItemID.SnowBlock, 100);
-            recipe.AddTile(TileID.AlchemyTable);
-            recipe.SetResult(ItemID.BlizzardinaBottle);
-            recipe.AddRecipe();
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.WoodenBoomerang);
-            recipe.AddIngredient(ItemID.IceBlock, 100);
-            recipe.AddTile(TileID.AlchemyTable);
-            recipe.SetResult(ItemID.IceBoomerang);
-            recipe.AddRecipe();
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.IronBroadsword);
-            recipe.AddIngredient(ItemID.IceBlock, 100);
-            recipe.AddTile(TileID.AlchemyTable);
-            recipe.SetResult(ItemID.IceBlade);
-            recipe.AddRecipe();
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.HermesBoots);
-            recipe.AddIngredient(ItemID.IceBlock, 100);
-            recipe.AddTile(TileID.AlchemyTable);
-            recipe.SetResult(ItemID.IceSkates);
-            recipe.AddRecipe();
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.WaterGun);
-            recipe.AddIngredient(ItemID.IceBlock, 100);
-            recipe.AddTile(TileID.AlchemyTable);
-            recipe.SetResult(ItemID.SnowballCannon);
-            recipe.AddRecipe();
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.HermesBoots);
-            recipe.AddTile(TileID.WorkBenches);
-            recipe.SetResult(ItemID.FlurryBoots);
-            recipe.AddRecipe();
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.MagicMirror);
-            recipe.AddIngredient(ItemID.IceBlock, 100);
-            recipe.AddTile(TileID.AlchemyTable);
-            recipe.SetResult(ItemID.IceMirror);
-            recipe.AddRecipe();
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.AtlanticCod, 5);
-            recipe.AddTile(TileID.LivingLoom);
-            recipe.SetResult(ItemID.Fish);
-            recipe.AddRecipe();
-
-            #endregion
-
-            #region shadow chest loot
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.Trident);
-            recipe.AddIngredient(ItemID.SoulofNight);
-            recipe.AddTile(TileID.AlchemyTable);
-            recipe.SetResult(ItemID.DarkLance);
-            recipe.AddRecipe();
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.MagicMissile);
-            recipe.AddIngredient(ItemID.LivingFireBlock);
-            recipe.AddTile(TileID.AlchemyTable);
-            recipe.SetResult(ItemID.Flamelash);
-            recipe.AddRecipe();
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.Fireblossom);
-            recipe.AddIngredient(ItemID.LivingFireBlock);
-            recipe.AddTile(TileID.AlchemyTable);
-            recipe.SetResult(ItemID.FlowerofFire);
-            recipe.AddRecipe();
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.BlueMoon);
-            recipe.AddIngredient(ItemID.LivingFireBlock);
-            recipe.AddTile(TileID.AlchemyTable);
-            recipe.SetResult(ItemID.Sunfury);
-            recipe.AddRecipe();
-
-            recipe = new ModRecipe(this);
-            recipe.AddIngredient(ItemID.BeesKnees);
-            recipe.AddIngredient(ItemID.LivingFireBlock);
-            recipe.AddTile(TileID.AlchemyTable);
-            recipe.SetResult(ItemID.HellwingBow);
-            recipe.AddRecipe();
-
-            #endregion
-
             #region biome chest loot
 
             recipe = new ModRecipe(this);
@@ -1471,6 +1391,20 @@ namespace Fargowiltas
             recipe.SetResult(ItemID.FlowerBoots);
             recipe.AddRecipe();
 
+            recipe = new ModRecipe(this);
+            recipe.AddIngredient(ItemID.Loom);
+            recipe.AddIngredient(ItemID.Vine, 10);
+            recipe.AddTile(TileID.WorkBenches);
+            recipe.SetResult(ItemID.LivingLoom);
+            recipe.AddRecipe();
+
+            recipe = new ModRecipe(this);
+            recipe.AddIngredient(ItemID.NaturesGift);
+            recipe.AddIngredient(ItemID.RedHusk);
+            recipe.AddTile(TileID.LivingLoom);
+            recipe.SetResult(ItemID.JungleRose);
+            recipe.AddRecipe();
+
             #endregion
         }
 
@@ -1510,6 +1444,7 @@ namespace Fargowiltas
                 ItemID.ShadewoodBookcase,
                 ItemID.PalmWoodBookcase,
                 ItemID.BorealWoodBookcase,
+                ItemID.DynastyBookcase
             });
             RecipeGroup.RegisterGroup("Fargowiltas:AnyBookcase", group);
 
@@ -1521,6 +1456,21 @@ namespace Fargowiltas
                 ItemID.RustyArmoredBonesBanner,
             });
             RecipeGroup.RegisterGroup("Fargowiltas:AnyArmoredBones", group);
+        }
+
+        public override void HandlePacket(BinaryReader reader, int whoAmI)
+        {
+            byte boi = reader.ReadByte();
+
+            switch (boi)
+            {
+                case 1: //regal statue
+                    FargoWorld.ReceiveCurrentSpawnRateTile(reader, whoAmI);
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 }

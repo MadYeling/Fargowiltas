@@ -5,11 +5,11 @@ using Terraria.ModLoader;
 
 namespace Fargowiltas.Projectiles.Explosives
 {
-    public class GlaiveProj : ModProjectile
+    public class ShurikenProj : ModProjectile
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Glaive");
+            DisplayName.SetDefault("Shuriken");
         }
 
         public override void SetDefaults()
